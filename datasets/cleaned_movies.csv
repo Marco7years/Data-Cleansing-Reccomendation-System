@@ -6052,7 +6052,7 @@ movieId,title,genres,year
 40614,Derailed,Drama|Thriller,2005
 40617,Creep,Horror|Thriller,2004
 40629,Pride & Prejudice,Drama|Romance,2005
-40697,,Sci-Fi,
+40697,Babylon 5,Sci-Fi,
 40723,Wolf Creek,Crime|Horror|Thriller,2005
 40732,"Descent, The",Adventure|Drama|Horror|Thriller,2005
 40815,Harry Potter and the Goblet of Fire,Adventure|Fantasy|Thriller|IMAX,2005
@@ -9024,7 +9024,7 @@ movieId,title,genres,year
 140850,Every Secret Thing,Crime|Drama|Mystery|Thriller,2014
 140852,964 Pinocchio,Horror|Sci-Fi,1991
 140928,Joy,Comedy|Drama,2015
-140956,,Action|Sci-Fi|Thriller,
+140956,Ready Player One,Action|Sci-Fi|Thriller,
 141004,Victor Frankenstein,Drama|Horror|Sci-Fi,2015
 141131,Guardians,(no genres listed),2016
 141400,Invincible Shaolin,Action,1978
@@ -9084,7 +9084,7 @@ movieId,title,genres,year
 143365,The Circle,Drama|Sci-Fi|Thriller,2016
 143367,Silence,Drama|Thriller,2016
 143385,Bridge of Spies,Drama|Thriller,2015
-143410,,(no genres listed),
+143410,Hyena Road,(no genres listed),
 143458,The Great Hypnotist,Drama|Mystery|Thriller,2014
 143472,Into the Grizzly Maze,Action|Horror|Thriller,2015
 143511,Human,Documentary,2015
@@ -9131,7 +9131,7 @@ movieId,title,genres,year
 147002,Eros,Drama|Romance,2004
 147142,Those Happy Days,Children|Comedy,2006
 147196,The Girls,Comedy|Romance,1961
-147250,,(no genres listed),
+147250,The Adventures of Sherlock Holmes and Doctor Watson,(no genres listed),
 147282,What Men Still Talk About,Comedy,2011
 147286,The Adventures of Sherlock Holmes and Doctor Watson: The Treasures of Agra,Crime|Mystery,1983
 147300,Adventures Of Sherlock Holmes And Dr. Watson: The Twentieth Century Approaches,Crime|Mystery,1986
@@ -9172,7 +9172,7 @@ movieId,title,genres,year
 149144,Parasyte: Part 1,Horror|Sci-Fi,2014
 149146,Parasyte: Part 2,Horror|Sci-Fi,2015
 149330,A Cosmic Christmas,(no genres listed),1977
-149334,,Drama|Thriller,
+149334,Nocturnal Animals,Drama|Thriller,
 149350,Lumberjack Man,Comedy|Horror,2015
 149352,Daddy's Home,Comedy,2015
 149354,Sisters,Children|Comedy,2015
@@ -9252,7 +9252,7 @@ movieId,title,genres,year
 156371,Everybody Wants Some,Comedy,2016
 156387,Sing Street,Drama,2016
 156553,Zoom,Animation|Comedy|Drama,2015
-156605,,(no genres listed),
+156605,Paterson,(no genres listed),
 156607,The Huntsman Winter's War,Action|Adventure|Drama|Fantasy,2016
 156609,Neighbors 2: Sorority Rising,Comedy,2016
 156675,Project X,Mystery|Sci-Fi,1968
@@ -9360,7 +9360,7 @@ movieId,title,genres,year
 162082,Train to Busan,Action|Thriller,2016
 162344,Tom Segura: Mostly Stories,Comedy,2016
 162350,The Magnificent Seven,Action|Western,2016
-162414,,Drama,
+162414,Moonlight,Drama,
 162478,Masterminds,Action|Comedy|Crime,2016
 162578,Kubo and the Two Strings,Adventure|Animation|Children|Fantasy,2016
 162590,Bridget Jones's Baby,Comedy|Romance,2016
@@ -9441,7 +9441,7 @@ movieId,title,genres,year
 167370,Assassin's Creed,Action|Adventure|Sci-Fi,2016
 167380,A Dog's Purpose,Comedy|Drama,2017
 167538,Microwave Massacre,Horror,1983
-167570,,(no genres listed),
+167570,The OA,(no genres listed),
 167634,Fist Fight,Comedy,2017
 167706,Shakespeare Behind Bars,Documentary,2005
 167732,A Street Cat Named Bob,Comedy|Drama,2016
@@ -9507,8 +9507,8 @@ movieId,title,genres,year
 171011,Planet Earth II,Documentary,2016
 171023,The Hero,Drama,2017
 171251,"Nobody Speak: Hulk Hogan, Gawker and Trials of a Free Press",Documentary,2017
-171495,,(no genres listed),
-171631,,(no genres listed),
+171495,Cosmos,(no genres listed),
+171631,Maria Bamford: Old Baby,(no genres listed),
 171695,Robin Williams: Live on Broadway,Comedy,2002
 171701,The Death of Louis XIV,Drama,2016
 171749,Death Note: Desu nôto (2006,(no genres listed),2007
@@ -9518,7 +9518,7 @@ movieId,title,genres,year
 171765,Okja,Action|Adventure|Drama|Sci-Fi,2017
 171811,Embassy,Comedy|Sci-Fi|War,2013
 171867,Rough Night,Comedy|Drama,2017
-171891,,(no genres listed),
+171891,Generation Iron 2,(no genres listed),
 171917,Mystère à la Tour Eiffel,Drama|Mystery|Thriller,2015
 172013,Stefan Zweig: Farewell to Europe,Drama,2016
 172215,Saved by the Bell: Hawaiian Style,Comedy,1992
@@ -9604,7 +9604,7 @@ movieId,title,genres,year
 176419,Mother!,Drama|Horror|Mystery|Thriller,2017
 176423,Icarus,Documentary,2017
 176579,Cage Dive,Drama|Horror|Thriller,2017
-176601,,(no genres listed),
+176601,Black Mirror,(no genres listed),
 176621,Boniface's Holiday,Animation|Children|Comedy|Romance,1965
 176751,American Made,Crime|Thriller,2017
 176805,Little Boxes,Comedy|Drama,2017
