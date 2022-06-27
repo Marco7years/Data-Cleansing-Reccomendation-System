@@ -105,6 +105,25 @@ def add_rel_rated(ratings: pd.DataFrame, batch_size: int = 10000):
 
     return insert_data(query, ratings, batch_size)
 
+def ratings_per_movie(movieId : int):
+
+    query = '''
+            MATCH (m:Movie {movieId: $movieId})-[r:RATED]-(u:User)
+            RETURN m, count(u) AS num_ratings
+            '''
+    res = conn.query(query, parameters={'movieId': movieId})  
+    params = ['m', 'num_ratings']
+    parse_result(res, params)     
+
+    return
+
+# Input type: 'neo4j.graph.Node'
+def parse_result(res, params: list):
+    for record in res:
+        for idx, column in enumerate(record):
+            print(params[idx], ": ", column)
+    
+
 def insert_data(query: str, rows: pd.DataFrame, batch_size: int):
     # Function to handle the updating the Neo4j database in batch mode.
     total = 0
@@ -120,9 +139,9 @@ def insert_data(query: str, rows: pd.DataFrame, batch_size: int):
         """
         A record is a dictionary with this structure:
             {attribute_1: value, attribute_2: value, ecc.}
-            {'movieId': 1, 'title': 'Toy Story'}, 
-            {'movieId': 2, 'title': 'Jumanji'}, 
-            {'movieId': 3, 'title': 'Grumpier Old Men'}
+            {'movieId': 1, 'title': 'Toy Story', '1995'}, 
+            {'movieId': 2, 'title': 'Jumanji', '2001'}, 
+            {'movieId': 3, 'title': 'Grumpier Old Men', '2002}
         """
         
         total += res[0]['total']
@@ -136,7 +155,7 @@ def insert_data(query: str, rows: pd.DataFrame, batch_size: int):
 
 
 if __name__ == "__main__":
-    conn = Neo4jConnection("bolt://localhost:7687", "neo4j", "ciao")
+    conn = Neo4jConnection("bolt://localhost:7687", "neo4j", "ciao", "recommendation-movies")
 
     # Retrieve Movies
     path_movies = "./datasets/cleaned_movies.csv"
@@ -162,7 +181,7 @@ if __name__ == "__main__":
     df_users = pd.read_csv(path_users)
 
     # Create nodes for users
-    add_users(df_users)
+    # add_users(df_users)
 
     # Retrieve Ratings
     path_ratings = './datasets/ratings.csv'
@@ -170,5 +189,8 @@ if __name__ == "__main__":
 
     # Create users and relationships with movies through ratings
     # add_rel_rated(df_ratings, 10000)
+
+    # Compute the number of rating for the given movie
+    ratings_per_movie(5)
 
     conn.close()
