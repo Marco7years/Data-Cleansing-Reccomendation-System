@@ -39,11 +39,18 @@ def add_movies(movies: pd.DataFrame, batch_size: int = 3000):
     # Adds movie nodes to the Neo4j graph.
     query = '''
             UNWIND $rows AS row
-            MERGE (c:Movie {movieId: row.movieId, title: row.title})
+            MERGE (m:Movie {movieId: row.movieId, title: row.title})
             RETURN count(*) as total
             '''
+    insert_data(query, movies, batch_size)
+    
+    create_constraint = "CREATE CONSTRAINT FOR (m:Movie) REQUIRE m.movieId IS UNIQUE"
+    res = conn.query(create_constraint)
+    
+    if res is not None:
+        print("Unique constraint successfully created.")
 
-    return insert_data(query, movies, batch_size)
+    return 
 
 
 def add_genres(genres: pd.DataFrame, batch_size: int = 300):
@@ -77,8 +84,15 @@ def add_users(users: pd.DataFrame, batch_size: int = 300):
             MERGE (u:User {userId: row.userId, name: row.name})
             RETURN count(*) as total
             '''
+    insert_data(query, users, batch_size)
 
-    return insert_data(query, users, batch_size)
+    create_constraint = "CREATE CONSTRAINT FOR (u:User) REQUIRE u.userId IS UNIQUE"
+    res = conn.query(create_constraint)
+    
+    if res is not None:
+        print("Unique constraint successfully created.")
+    
+    return
 
 def add_rel_rated(ratings: pd.DataFrame, batch_size: int = 10000):
     # Adds user nodes to the Neo4j graph.
@@ -122,7 +136,7 @@ def insert_data(query: str, rows: pd.DataFrame, batch_size: int):
 
 
 if __name__ == "__main__":
-    conn = Neo4jConnection("bolt://localhost:7687", "neo4j", "ciao", "recommendation-movies")
+    conn = Neo4jConnection("bolt://localhost:7687", "neo4j", "ciao")
 
     # Retrieve Movies
     path_movies = "./datasets/cleaned_movies.csv"
@@ -148,13 +162,13 @@ if __name__ == "__main__":
     df_users = pd.read_csv(path_users)
 
     # Create nodes for users
-    # add_users(df_users)
+    add_users(df_users)
 
     # Retrieve Ratings
     path_ratings = './datasets/ratings.csv'
     df_ratings = pd.read_csv(path_ratings)
 
     # Create users and relationships with movies through ratings
-    add_rel_rated(df_ratings, 10000)
+    # add_rel_rated(df_ratings, 10000)
 
     conn.close()
