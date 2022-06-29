@@ -3,6 +3,7 @@
 Assuming having python3 installed on your machine, you have to installed the following libraries:
 
 > pip3 install neo4j
+
 > pip3 install pandas
 
 Then you have to install [neo4j desktop](https://neo4j.com/) or it is possible to use the [sandbox version of neo4j](https://neo4j.com/sandbox/) to run the system remotely.
@@ -15,6 +16,7 @@ Create a Neo4j DBMS named 'Recommendation-System' with password 'dmproject'.
 Once the DBMS is created, you have to install the following plugins in the 'plugins' section that should appear on the right:
 
 > APOC
+
 > Graph Data Science Library
 
 
