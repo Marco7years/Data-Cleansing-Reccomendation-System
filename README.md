@@ -22,3 +22,5 @@ Once the DBMS is created, you have to install the following plugins in the 'plug
 
 The graph database is created by running the 'create_graph_database.py' script.
 
+Finally, you can execute the queries in the 'query_in_neo4j.txt' file on the Neo4j system and build the recommendation system.
+

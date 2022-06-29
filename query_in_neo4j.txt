@@ -1,0 +1,67 @@
+Create relationship SIMILAR between similar users according to Pearson correlation
+// Create relationship SIMILAR between similar users according to Pearson correlation
+// For every pair of different Users who rated the same movie
+MATCH (u1:User)-[r1:RATED]->(movie)<-[r2:RATED]-(u2:User)
+WHERE u2 <> u1
+
+// Save in a list the ratings of each user
+WITH u1, u2, collect(r1.rating) AS u1Ratings, collect(r2.rating) AS u2Ratings
+WITH u1, u2, u1Ratings, gds.similarity.pearson(u1Ratings, u2Ratings) AS similarity
+
+// Consider only users who rated more than 10 movies 
+WHERE size(u1Ratings) > 10 AND similarity >= 0.75
+// Create SIMILAR relationship
+MERGE (u1)-[s:SIMILAR]-(u2)
+SET s.similarity = similarity
+
+____________________________________________________________________________________________________
+
+Recommended Movies for a given user
+// Given user u1, it considers all similar users to him 
+MATCH (u1:User {userId: 50})-[s:SIMILAR]-(u2:User)-[r:RATED]->(m:Movie)
+// Get movies that u1 did not rate
+WHERE NOT EXISTS ((u1)-[:RATED]->(m))
+// Collect all similar users’ ratings of a particular movie
+WITH m, s, COLLECT(r.rating) as ratings
+// For each rating
+UNWIND ratings as r
+// Compute recommending score for a movie, as the sum of ratings weighted on pearson similarity
+RETURN m.title, SUM(s.similarity * r) AS score
+ORDER BY score DESC LIMIT 5
+
+____________________________________________________________________________________________________
+
+Recommended Movies for a given user and creation RECOMMENDED relationship 
+// Given user u1, it considers all similar users to him 
+MATCH (u1:User {userId: 1})-[s:SIMILAR]-(u2:User)-[r:RATED]->(m:Movie)
+// Get movies that u1 did not rate
+WHERE NOT EXISTS ((u1)-[:RATED]->(m))
+// Collect all similar users’ ratings of a particular movie
+WITH m, s, COLLECT(r.rating) as ratings, u1
+// For each rating
+UNWIND ratings as r
+// Compute recommending score for a movie, as the sum of ratings weighted on pearson similarity
+WITH SUM(s.similarity * r) AS score, u1, m
+// Get the first movies with highest score
+WITH m, score, u1
+ORDER BY score DESC LIMIT 5
+// Create the relationship “RECOMMENDED” between the user in input and the movies recommended
+MERGE (u1)<-[:RECOMMENDED]-(m)
+RETURN m.title, score
+
+____________________________________________________________________________________________________
+
+Correlation between	genres of rated and recommended movies
+MATCH (g1:Genre)-[:HAS_GENRE]-(m1:Movie)-[:RATED]-(u:User {userId: 1})-[:RECOMMENDED]-(m2:Movie)-[:HAS_GENRE]-(g2:Genre)
+// Save as lists the genres of the rated and recommended movies  
+WITH collect(distinct g2.name) AS rec, collect(distinct g1.name) AS rat
+// Compute the commonsection between the lists of rated and recommended movies
+// and the sizes of those lists
+WITH size(rec) AS s_rec, size(rat) AS s_rat, apoc.coll.intersection(rec, rat) AS common
+// s_genres is the size of the union of the considered lists
+WITH size(common) AS s_common, common, (s_rat + s_rec - size(common)) AS s_genres
+WHERE s_genres <> 0
+RETURN common, toFloat(s_common) / s_genres AS similarity
+
+
+
