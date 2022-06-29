@@ -152,9 +152,9 @@ class RecommendationSystem(Neo4jConnection):
 
         return self._insert_data(query, ratings, batch_size)
 
-    def ratings_per_movie(self, movieId : int):
-        print('\nRetrieving the number of ratings per movie...')
-        # Query to retrieve the number of ratings per movie
+    def ratings_movie(self, movieId : int):
+        print('\nRetrieving the number of ratings for a given movie...')
+        # Query to retrieve the number of ratings for a given movie
         query = '''
                 MATCH (m:Movie {movieId: $movieId})-[r:RATED]-(u:User)
                 RETURN m, count(u) AS num_ratings
@@ -221,6 +221,6 @@ if __name__ == "__main__":
 
     # rec_sys.read_input_data_and_create_db(path_movies, path_genres, path_users, path_ratings)
     # Compute the number of rating for the given movie
-    rec_sys.ratings_per_movie(5)
+    rec_sys.ratings_movie(5)
 
     rec_sys.close()
