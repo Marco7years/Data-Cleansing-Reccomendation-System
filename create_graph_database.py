@@ -46,6 +46,7 @@ class RecommendationSystem(Neo4jConnection):
 
     def read_input_data_and_create_db(self, path_movies: str, path_genres: str, 
                                             path_users: str, path_ratings: str):
+
         # Retrieve Movies
         df_movies = pd.read_csv(path_movies)
         df_movies['genres'] = df_movies['genres'].apply(lambda x: x.split("|"))
@@ -73,8 +74,7 @@ class RecommendationSystem(Neo4jConnection):
 
         # Create RATED relationship between Movie and User
         self.add_rel_rated(df_ratings)
-
-
+        
 
     def add_movies(self, movies: pd.DataFrame, batch_size: int = 3000):
         print('\nCreating Movies...')
@@ -94,7 +94,6 @@ class RecommendationSystem(Neo4jConnection):
             print("Unique constraint successfully created")
 
         return 
-
 
     def add_genres(self, genres: pd.DataFrame, batch_size: int = 300):
         print('\nCreating Genres...')
@@ -208,8 +207,8 @@ class RecommendationSystem(Neo4jConnection):
 if __name__ == "__main__":
     uri = "bolt://localhost:7687"
     user = "neo4j"
-    psw = "ciao"
-    db = None
+    psw = "dmproject"
+    db = None # None if default database is used
 
     rec_sys = RecommendationSystem(uri, user, psw, db)
 
@@ -218,9 +217,9 @@ if __name__ == "__main__":
     path_users = './datasets/users.csv'
     path_ratings = './datasets/ratings.csv'
 
-
-    # rec_sys.read_input_data_and_create_db(path_movies, path_genres, path_users, path_ratings)
+    rec_sys.read_input_data_and_create_db(path_movies, path_genres, path_users, path_ratings)
+ 
     # Compute the number of rating for the given movie
-    rec_sys.ratings_movie(5)
+    # rec_sys.ratings_movie(5)
 
     rec_sys.close()
