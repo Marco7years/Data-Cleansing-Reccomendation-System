@@ -13,7 +13,7 @@ Create a Neo4j DBMS named 'Recommendation-System' with password 'dmproject'.
 **Note**: It is possible to create a new database different from the default one.
       In such case edit the variable 'db' in 'create_graph_database.py' to assign the name of the new db created.
 
-Once the DBMS is created, you have to install the following plugins in the 'plugins' section that should appear on the right:
+Once the DBMS is created, you have to install the following plugins from the 'plugins' section that should appear on the right:
 
 > APOC
 
