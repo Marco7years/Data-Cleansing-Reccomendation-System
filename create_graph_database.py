@@ -82,6 +82,7 @@ class RecommendationSystem(Neo4jConnection):
         query = '''
                 UNWIND $rows AS row
                 MERGE (m:Movie {movieId: row.movieId, title: row.title})
+                SET m.year = toInteger(row.year)
                 RETURN count(*) as total
                 '''
         self._insert_data(query, movies, batch_size)
@@ -208,7 +209,7 @@ if __name__ == "__main__":
     uri = "bolt://localhost:7687"
     user = "neo4j"
     psw = "dmproject"
-    db = None # None if default database is used
+    db = "presentation" # None if default database is used
 
     rec_sys = RecommendationSystem(uri, user, psw, db)
 

@@ -55,7 +55,7 @@ Correlation between	genres of rated and recommended movies
 MATCH (g1:Genre)-[:HAS_GENRE]-(m1:Movie)-[:RATED]-(u:User {userId: 1})-[:RECOMMENDED]-(m2:Movie)-[:HAS_GENRE]-(g2:Genre)
 // Save as lists the genres of the rated and recommended movies  
 WITH collect(distinct g2.name) AS rec, collect(distinct g1.name) AS rat
-// Compute the commonsection between the lists of rated and recommended movies
+// Compute the intersection between the lists of rated and recommended movies
 // and the sizes of those lists
 WITH size(rec) AS s_rec, size(rat) AS s_rat, apoc.coll.intersection(rec, rat) AS common
 // s_genres is the size of the union of the considered lists
